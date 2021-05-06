@@ -33,6 +33,15 @@ gem 'devise'
 gem 'cocoon'
 gem 'jquery-rails'
 
+#kaminari pagination
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
+
+#Generates data at random
+gem 'faker'
+
+#Search and table order
+gem'ransack'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
