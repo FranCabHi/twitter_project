@@ -11,17 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :tw_content %>
-    <%= form.text_area :tw_content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field mb-3">
+    <%= form.text_area :tw_content, autocomplete: "What's happening", class: "form-control", rows: "3" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-info" %>
   </div>
 <% end %>

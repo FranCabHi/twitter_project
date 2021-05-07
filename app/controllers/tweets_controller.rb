@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
   # GET /tweets or /tweets.json
   def index
     @tweets = Tweet.all
+    @tweet = Tweet.new
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -21,12 +22,13 @@ class TweetsController < ApplicationController
 
   # POST /tweets or /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.new(tweet_params.merge(user: current_user))
+    #@tweet.user_id = current_user.id
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to @tweet, notice: "Tweet was successfully created." }
-        format.json { render :show, status: :created, location: @tweet }
+        format.html { redirect_to root_path, notice: "Tweet was successfully created." }
+        format.json { render :index, status: :created, location: @tweet }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
@@ -36,14 +38,18 @@ class TweetsController < ApplicationController
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
   def update
-    respond_to do |format|
-      if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
-        format.json { render :show, status: :ok, location: @tweet }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+    if @tweet.user == current_user
+      respond_to do |format|
+        if @tweet.update(tweet_params)
+          format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
+          format.json { render :show, status: :ok, location: @tweet }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @tweet.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to tweets_url, alert: 'You lack permissions to edit'
     end
   end
 
@@ -64,6 +70,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:tw_content, :user_id)
+      params.require(:tweet).permit(:tw_content, :user_name, :user_photo)
     end
 end
