@@ -15,7 +15,7 @@ class LikesController < ApplicationController
         if already_liked?
             @like.destroy
         else
-            flash[:notice] = "You can't like more than once"
+            flash[:notice] = "You can't unlike more than once"
         end
         redirect_to root_path
     end 

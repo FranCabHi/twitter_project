@@ -63,14 +63,14 @@ class TweetsController < ApplicationController
   end
 
   def retweet
-    redirect_to root_path, alert: "No puede RT su propio tweet" and return if @tweet.user == current_user
+    redirect_to root_path, alert: "Unable to retweet your own tweet." and return if @tweet.user == current_user
     retweeted = Tweet.new(tw_content: @tweet.tw_content, retweet_child: @tweet.id)
     retweeted.user = current_user
     if retweeted.save
       @tweet.update(retweet: @tweet.retweet +=1) 
-      redirect_to root_path, notice: "RT correctamente"
+      redirect_to root_path, notice: "Retweet was posted successfully."
     else
-      redirect_to root_path, alert: "No se pudo RT"
+      redirect_to root_path, alert: "Unable to retweet."
     end
   end
 
