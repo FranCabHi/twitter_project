@@ -24,9 +24,13 @@
                     <%= tweet.counting_likes %> <%= (tweet.counting_likes) == 1 ? 'Like' : 'Likes'%> |
                     <% if signed_in? %>
                       <% if like_check(tweet, current_user) %>
-                        <%= link_to 'Unlike', tweet_like_path(tweet, like_check(tweet,current_user)), method: :delete %>
+                        <%= link_to tweet_like_path(tweet, like_check(tweet,current_user)), method: :delete do %>
+                          <i class="far fa-heart fa-xs"></i>
+                        <% end %>
                       <% else %>
-                        <%= link_to 'Like', tweet_likes_path(tweet), method: :post %>
+                        <%= link_to tweet_likes_path(tweet), method: :post do %>
+                          <i class="fas fa-heart fa-xs"></i>
+                        <% end %>
                       <% end %>
                     <% end %>
                   </p>
@@ -45,7 +49,7 @@
           </div>
         </div>
       <% end %>
-      
+
     </div>
   </div>
 </div>

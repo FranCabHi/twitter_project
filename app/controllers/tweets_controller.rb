@@ -30,8 +30,8 @@ class TweetsController < ApplicationController
         format.html { redirect_to root_path, notice: "Tweet was successfully created." }
         format.json { render :index, status: :created, location: @tweet }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: "Cannot post an empty tweet." }
+        #format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +57,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     respond_to do |format|
-      format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
   end
