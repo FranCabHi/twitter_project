@@ -8,7 +8,7 @@
 
     <div class="row row-cols-1 g-1">
 
-      <% @tweets.reverse.each do |tweet| %>
+      <% @tweets.each do |tweet| %>
         <div class="col">
           <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
@@ -25,11 +25,11 @@
                     <% if signed_in? %>
                       <% if like_check(tweet, current_user) %>
                         <%= link_to tweet_like_path(tweet, like_check(tweet,current_user)), method: :delete do %>
-                          <i class="far fa-heart fa-sm"></i>
+                          <i class="fas fa-heart fa-sm"></i>
                         <% end %>
                       <% else %>
                         <%= link_to tweet_likes_path(tweet), method: :post do %>
-                          <i class="fas fa-heart fa-sm"></i>
+                          <i class="far fa-heart fa-sm"></i>
                         <% end %>
                       <% end %>
                       | <%= tweet.counting_likes %> <%= (tweet.counting_likes) == 1 ? 'Like' : 'Likes'%> |
@@ -57,6 +57,14 @@
           </div>
         </div>
       <% end %>
+
+    <div class="pagination justify-content-center">
+        <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
+    </div>
+
+    </div>
+
+   
 
     </div>
   </div>

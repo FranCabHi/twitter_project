@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+
+100.times do
+    Tweet.create(tw_content: Faker::JapaneseMedia::StudioGhibli.quote,
+        user_id: rand(4..9)
+    )
+end
