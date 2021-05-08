@@ -39,7 +39,7 @@
                     </small>
                   </p>
                 </div>
-
+              
               </div>
             </div>
           </div>
@@ -47,6 +47,11 @@
 
     </div>
   </div>
+  <div class="container">
+    <% @tweet.likes.each do |user|  %>
+      <img src="<%= user.avatar %>" class="img-thumbnail rounded-circle" style="max-width: 75px;">
+    <% end %>
+  </div>  
   <p><%= link_to 'Back', tweets_path %></p>
 </div>
 
