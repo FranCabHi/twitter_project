@@ -37,21 +37,21 @@ class TweetsController < ApplicationController
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
-  def update
-    if @tweet.user == current_user
-      respond_to do |format|
-        if @tweet.update(tweet_params)
-          format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
-          format.json { render :show, status: :ok, location: @tweet }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @tweet.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      redirect_to tweets_url, alert: 'You lack permissions to edit'
-    end
-  end
+  # def update
+  #   if @tweet.user == current_user
+  #     respond_to do |format|
+  #       if @tweet.update(tweet_params)
+  #         format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
+  #         format.json { render :show, status: :ok, location: @tweet }
+  #       else
+  #         format.html { render :edit, status: :unprocessable_entity }
+  #         format.json { render json: @tweet.errors, status: :unprocessable_entity }
+  #       end
+  #     end
+  #   else
+  #     redirect_to tweets_url, alert: 'You lack permissions to edit'
+  #   end
+  # end
 
   # DELETE /tweets/1 or /tweets/1.json
   def destroy
