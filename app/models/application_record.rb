@@ -8,4 +8,5 @@ class ApplicationRecord < ActiveRecord::Base
   def counting_likes
     likes.count
   end
+
 end

@@ -37,7 +37,7 @@
                   </p>
                   <p class="card-text">
                     <small class="text-muted">
-                      <%= link_to time_ago_in_words(@tweet.created_at), @tweet %> ago
+                      <%= tweet_time_ago(@tweet) %>
                       <% if !@tweet.retweet_child.nil? %>
                         | <%= link_to "Original tweet", @tweet.tweet_ref  %>
                       <% end %>
