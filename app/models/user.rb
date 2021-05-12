@@ -13,9 +13,9 @@ class User < ApplicationRecord
   #array of users who follow the user instance
   has_many :follower_friends, through: :received_friendship, source: :follower_user
 
-  #array of follows a user gave to someone else
+  #array of follows where the user is the follower
   has_many :given_friendship, foreign_key: :user_id, class_name: "Friend"
 
-  #array of other users who the user has followed
-  has_many :following_friends, through: :given_friendship, source: :followed_friend
+  #array (instance method for getting all of the users a user follows)
+  has_many :following_friends, through: :given_friendship, source: :followee_friend
 end
