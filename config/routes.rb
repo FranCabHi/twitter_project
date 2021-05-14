@@ -5,11 +5,17 @@ Rails.application.routes.draw do
       post "retweet"
     end
   end
+
+  #resources :users, only: [:show]
   
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
 
+  devise_scope :user do
+    get '/users/:id' => 'users#show', as: "user"
+  end
+  
   post '/user/:id/friend', to: "users#friend", as: "friended_user"
   post '/user/:id/unfriend', to: "users#unfriend", as: "unfriended_user"
 
