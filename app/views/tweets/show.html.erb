@@ -18,7 +18,7 @@
                  <p class="card-text"><%= @tweet.tw_content %></p>
                   <p class="card-text">
           
-                    <% if signed_in? %>
+                    <% if signed_in? && current_user != nil %>
                       <% if like_check(@tweet, current_user) %>
                         <%= link_to tweet_like_path(@tweet, like_check(@tweet,current_user)), method: :delete do %>
                           <i class="fas fa-heart fa-sm"></i>

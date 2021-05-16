@@ -1,13 +1,12 @@
 <div class="container">
   <h1>Tweets</h1>
-  <% if signed_in?  %>
+  <% if signed_in? && current_user != nil %>
     <%= render 'form', tweet: @tweet %> 
   <% end  %>
 
   <div class="container">
 
     <div class="row row-cols-1 g-1">
-
       <% @tweets.each do |tweet| %>
         <div class="col">
           <div class="card mb-3" style="max-width: 540px;">
@@ -22,7 +21,7 @@
                   <p class="card-text"><%= link_to "@#{tweet.user_name}", user_path(tweet.user_id) %></p>
                   <p class="card-text"><%= tweet.tw_content %></p>
                   <p class="card-text"> 
-                    <% if signed_in? %>
+                    <% if signed_in? && current_user != nil %>
                       <% if like_check(tweet, current_user) %>
                         <%= link_to tweet_like_path(tweet, like_check(tweet,current_user)), method: :delete do %>
                           <i class="fas fa-heart fa-sm"></i>
@@ -59,13 +58,12 @@
           </div>
         </div>
       <% end %>
-
+    
     <div class="pagination justify-content-center">
         <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
     </div>
 
     </div>
-
    
 
     </div>
