@@ -16,7 +16,7 @@
 
                 <div class="card-body">
                    <p class="card-text">
-                    <% tweet.tw_content.to_s.split(' ').each do |word| %>
+                    <% @tweet.tw_content.to_s.split(' ').each do |word| %>
                         <% if word.start_with?('#') %>
                             <%= link_to word, search_path(query: word) %>
                         <% else %>
