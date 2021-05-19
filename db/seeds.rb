@@ -9,8 +9,9 @@
 require 'faker'
 
 100.times do
-    Tweet.create(tw_content: Faker::JapaneseMedia::StudioGhibli.quote,
-        user_id: rand(4..9)
+    Tweet.create(tw_content: 
+        Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
+        user_id: rand(1..8)
     )
 end
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') #if Rails.env.development?

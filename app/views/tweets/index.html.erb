@@ -3,7 +3,6 @@
   <% if signed_in? && current_user != nil %>
     <%= render 'form', tweet: @tweet %> 
   <% end  %>
-
   <div class="container">
     <%= render 'shared/timeline' %> 
   </div>
