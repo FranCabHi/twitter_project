@@ -15,7 +15,15 @@
               <div class="col-md-8">
 
                 <div class="card-body">
-                 <p class="card-text"><%= @tweet.tw_content %></p>
+                   <p class="card-text">
+                    <% tweet.tw_content.to_s.split(' ').each do |word| %>
+                        <% if word.start_with?('#') %>
+                            <%= link_to word, search_path(query: word) %>
+                        <% else %>
+                            <%= word %>
+                        <% end %>
+                    <% end %>
+                  </p>
                   <p class="card-text">
           
                     <% if signed_in? && current_user != nil %>

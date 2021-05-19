@@ -5,67 +5,6 @@
   <% end  %>
 
   <div class="container">
-
-    <div class="row row-cols-1 g-1">
-      <% @tweets.each do |tweet| %>
-        <div class="col">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="<%= tweet.avatar %>" class="img-fluid rounded">
-              </div>
-
-              <div class="col-md-8">
-
-                <div class="card-body">
-                  <p class="card-text"><%= link_to "@#{tweet.user_name}", user_path(tweet.user_id) %></p>
-                  <p class="card-text"><%= tweet.tw_content %></p>
-                  <p class="card-text"> 
-                    <% if signed_in? && current_user != nil %>
-                      <% if like_check(tweet, current_user) %>
-                        <%= link_to tweet_like_path(tweet, like_check(tweet,current_user)), method: :delete do %>
-                          <i class="fas fa-heart fa-sm"></i>
-                        <% end %>
-                      <% else %>
-                        <%= link_to tweet_likes_path(tweet), method: :post do %>
-                          <i class="far fa-heart fa-sm"></i>
-                        <% end %>
-                      <% end %>
-                      | <%= tweet.counting_likes %> <%= (tweet.counting_likes) == 1 ? 'Like' : 'Likes'%> |
-                      <%= link_to retweet_tweet_path(tweet), method: :post do %>
-                        <i class="fas fa-retweet fa-sm"></i>
-                      <% end %> 
-                      | <%= tweet.retweet %> RT
-                    <% else %>
-                      <%= tweet.counting_likes %> <%= (tweet.counting_likes) == 1 ? 'Like' : 'Likes'%> | <%= tweet.retweet %> RT
-                    <% end %> 
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">
-                      <%= link_to tweet_time_ago(tweet), tweet %>
-                      <% if !tweet.retweet_child.nil? %>
-                        | <%= link_to "Original tweet", tweet.tweet_ref  %>
-                      <% end %>
-                      <% if signed_in? && tweet.user == current_user %>
-                        <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "badge bg-primary" %>
-                      <% end %>
-                    </small>
-                  </p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    
-    <div class="pagination justify-content-center">
-        <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
-    </div>
-
-    </div>
-   
-
-    </div>
+    <%= render 'shared/timeline' %> 
   </div>
 </div>

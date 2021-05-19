@@ -21,6 +21,7 @@
               <%=link_to 'Inicia sesión', new_user_session_path, class: "nav-link" %>
           </li>  
         <% end %>
+      </ul>
         <%# <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -30,16 +31,18 @@
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul> %>
-        <%# </li>
+          </ul> 
+         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> %>
+      </ul> %>
+      
+      <div class="d-flex align-items-end">
+        <%= form_with url: search_path, method: :get, local: true, class: 'form-inline search-form' do |form| %>
+          <%= form.text_field :query, value: params[:query], class: 'form-control me-2', placeholder: '#search' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </nav>
