@@ -45,6 +45,9 @@ gem 'faker'
 #Search and table order
 gem'ransack'
 
+#Enable CORS
+gem 'rack-cors'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

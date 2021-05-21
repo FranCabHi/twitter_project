@@ -2,7 +2,7 @@ class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   validates :tw_content, presence: true
-  has_many :tweet_hash_tags
+  has_many :tweet_hash_tags, dependent: :destroy
   has_many :hash_tags, through: :tweet_hash_tags
   
   after_commit :create_hash_tags, on: :create

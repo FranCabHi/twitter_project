@@ -79,6 +79,32 @@ class TweetsController < ApplicationController
     end
   end
 
+  def news
+    @tweets = Tweet.all
+    @json_array = []
+    @tweets.each do |tweet|
+      tweet_hash = {
+        :id => tweet.id,
+        :content => tweet.tw_content,
+        :user_id => tweet.user_id,
+        :like_count => tweet.counting_likes,
+        :retweet_count => tweet.retweet,
+        :retweeted_from =>  if !tweet.retweet_child.nil?
+                                tweet.tweet_ref.id
+                            else 
+                                tweet.retweet_child.to_i
+                            end
+      }
+      @json_array.push tweet_hash
+    end
+
+    respond_to do |format|
+      format.json {render :json => @json_array.last(50)}
+    end
+  end
+
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
@@ -87,6 +113,6 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:tw_content, :user_name, :user_photo)
+      params.require(:tweet).permit(:tw_content, :user_name, :user_photo, :retweet  )
     end
 end

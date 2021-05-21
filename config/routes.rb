@@ -22,9 +22,10 @@ Rails.application.routes.draw do
   post '/user/:id/friend', to: "users#friend", as: "friended_user"
   post '/user/:id/unfriend', to: "users#unfriend", as: "unfriended_user"
 
+  get 'search', to: 'search#index'
+  get '/api/news', to: "tweets#news"
+  
   root "tweets#index"
 
-  get 'search', to: 'search#index'
-  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
