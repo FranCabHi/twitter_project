@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   get 'search/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -24,10 +25,20 @@ Rails.application.routes.draw do
 
   get 'search', to: 'search#index'
 
-  get '/api/news', to: "tweets#news"
-  get '/api/:date1/:date2', to: "tweets#dates_interval"
+
   
   root "tweets#index"
+
+  use_doorkeeper do
+    skip_controllers :authorizations, :applications, :authorized_applications
+  end
+
+  namespace :api do
+    resources :tweets
+      get 'news', to: "tweets#news"
+      get ':date1/:date2', to: "tweets#dates_interval"
+      post 'create', to: "tweets#create"    
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

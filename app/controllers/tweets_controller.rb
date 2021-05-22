@@ -79,55 +79,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  def news
-    @tweets = Tweet.all
-    @json_array = []
-    @tweets.each do |tweet|
-      tweet_hash = {
-        :id => tweet.id,
-        :content => tweet.tw_content,
-        :user_id => tweet.user_id,
-        :like_count => tweet.counting_likes,
-        :retweet_count => tweet.retweet,
-        :retweeted_from =>  if !tweet.retweet_child.nil?
-                                tweet.tweet_ref.id
-                            else 
-                                tweet.retweet_child.to_i
-                            end
-      }
-      @json_array.push tweet_hash
-    end
-
-    respond_to do |format|
-      format.json {render :json => @json_array.last(50)}
-    end
-  end
-
-  def dates_interval
-    @tweets = Tweet.where("created_at >= :start_date AND created_at <= :end_date", {:start_date => params[:date1].to_time, :end_date => params[:date2].to_time})
-
-    @json_array = []
-    @tweets.each do |tweet|
-      tweet_hash = {
-        :id => tweet.id,
-        :content => tweet.tw_content,
-        :user_id => tweet.user_id,
-        :like_count => tweet.counting_likes,
-        :retweet_count => tweet.retweet,
-        :retweeted_from =>  if !tweet.retweet_child.nil?
-                                tweet.tweet_ref.id
-                            else 
-                                tweet.retweet_child.to_i
-                            end
-      }
-      @json_array.push tweet_hash
-    end
-
-    respond_to do |format|
-      format.json {render :json => @json_array}
-    end
-  end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet

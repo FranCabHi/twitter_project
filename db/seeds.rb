@@ -8,10 +8,15 @@
 
 require 'faker'
 
-100.times do
+50.times do
     Tweet.create(tw_content: 
-        Faker::Movies::HitchhikersGuideToTheGalaxy.quote,
+        Faker::Movies::PrincessBride.quote,
         user_id: rand(1..8)
     )
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') #if Rails.env.development?
+#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') #if Rails.env.development?
+
+# if there is no OAuth application created, create them
+if Doorkeeper::Application.count.zero?
+    Doorkeeper::Application.create(name: "Heroku client", redirect_uri: "", scopes: "")
+end
