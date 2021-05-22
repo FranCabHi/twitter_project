@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   post '/user/:id/unfriend', to: "users#unfriend", as: "unfriended_user"
 
   get 'search', to: 'search#index'
+
   get '/api/news', to: "tweets#news"
+  get '/api/:date1/:date2', to: "tweets#dates_interval"
   
   root "tweets#index"
 
