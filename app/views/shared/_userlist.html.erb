@@ -1,0 +1,5 @@
+<% @users.each do |user|  %>
+    <%= link_to user_path(user) do %>
+        <img src="<%= user.user_photo %>" class="img-thumbnail rounded-circle" style="max-width: 55px;">
+    <% end  %>
+<% end %>

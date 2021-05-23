@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
       @tweets = Tweet.all.order("created_at DESC").page(params[:page])
     end
     @tweet = Tweet.new
-    
+    @users = User.all
   end
 
   # GET /tweets/1 or /tweets/1.json

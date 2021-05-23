@@ -14,7 +14,9 @@ require 'faker'
         user_id: rand(1..8)
     )
 end
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') #if Rails.env.development?
+
+#Active admin credentials
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') #if Rails.env.development?
 
 # if there is no OAuth application created, create them
 if Doorkeeper::Application.count.zero?

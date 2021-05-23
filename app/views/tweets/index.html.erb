@@ -4,6 +4,16 @@
     <%= render 'form', tweet: @tweet %> 
   <% end  %>
   <div class="container">
-    <%= render 'shared/timeline' %> 
+    <%= render 'shared/userlist' %> 
   </div>
+  <br>
+  <% if @tweets.empty? %>
+    <div class="alert alert-info" role="alert">
+      <i class="fas fa-info-circle"></i> Follow some accounts to see more tweets here! Click the icons above to check them.
+    </div>
+  <% else %>
+    <div class="container">
+      <%= render 'shared/timeline' %> 
+    </div>
+  <% end %>
 </div>
