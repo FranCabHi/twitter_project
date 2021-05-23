@@ -1,7 +1,7 @@
 module Api
     class ApplicationController < ActionController::API
       # equivalent of authenticate_user! on devise, but this one will check the oauth token
-      before_action :doorkeeper_authorize!
+      before_action :doorkeeper_authorize!, only: [:create]
   
       private
   
